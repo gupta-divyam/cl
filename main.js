@@ -35,21 +35,38 @@ if(width < 992){
      last_position_of_x=currentX;
      last_position_of_y=currentY;
     }
-    canvas.addEventListener("mousemove", mouse_move)
+    mouseposition= "";
+canvas.addEventListener("mousedown", mouse_down)
+function mouse_down() {
+mouseposition= "mousedown"
+}
+canvas.addEventListener("mouseup", mouse_up)
+function mouse_up() {
+mouseposition= "mouseup"
+}
+canvas.addEventListener("mouseleave", mouse_leave)
+function mouse_leave() {
+mouseposition= "mouseleave"
+}
+canvas.addEventListener("mousemove", mouse_move)
 function mouse_move(e) {
-currentX= e.clientX- canvas.offsetLeft;
-currentY= e.clientY- canvas.offsetTop;
+currentX_position= e.clientX- canvas.offsetLeft;
+currentY_position= e.clientY- canvas.offsetTop;
 
 if(mouseposition == "mousedown"){
+    console.log("inSideIt")
     ctx.beginPath()
-    ctx.strokeStyle= "Black";
+    ctx.strokeStyle= "black";
   ctx.lineWidth= 2;
 
-  ctx.moveTo(last_position_of_x, last_position_of_y)
+  ctx.moveTo(lastX_pos, lastY_pos)
 
-  ctx.lineTo(currentX, currentY)
+  ctx.lineTo(currentX_position, currentY_position)
   ctx.stroke()
 }
-last_position_of_x= currentX_position;
-last_position_of_y= currentY_position;
+lastX_pos= currentX_position;
+lastY_pos= currentY_position;
+}
+function clear1(){
+    ctx.clearRect(0,0,canvas.width,canvas.height)
 }
